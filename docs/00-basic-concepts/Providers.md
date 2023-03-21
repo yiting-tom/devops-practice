@@ -1,4 +1,23 @@
 # Providers
+
+| | |
+| --- | --- |
+| **Status** | Pending Approval |
+| **Author** | [Yi-Ting Li](yiting-tom.github.io) |
+| **Version** | 1.0.0 |
+| **Last Updated** | 2023-03-21 |
+| **Created At** | 2023-03-21 |
+
+## Table of Contents
+
+* [Providers](#providers)
+   * [Downloading Providers](#downloading-providers)
+   * [Declaration of Providers](#declaration-of-providers)
+   * [Version Constraints](#version-constraints)
+      * [Warning](#️-warning)
+
+---
+
 Terraform relies on the [go-plugin](https://github.com/hashicorp/go-plugin) established by HashiCorp. Each provider plugin runs as an independent process and communicates with Terraform via remote procedure calls (RPC).
 
 Terraform executes three main functions:
