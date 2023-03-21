@@ -12,7 +12,19 @@
 
 <!-- endtable -->
 
-[toc]
+Table of Contents
+=================
+
+* [Data Types](#data-types)
+   * [Non-structured data types](#non-structured-data-types)
+      * [Implicit Conversion](#implicit-conversion)
+   * [Structured data types](#structured-data-types)
+      * [Type Abbreviations](#type-abbreviations)
+      * [Type Abbreviations in object Type](#type-abbreviations-in-object-type)
+         * [Example: Embedded structure with optional attributes and default values](#example-embedded-structure-with-optional-attributes-and-default-values)
+         * [Example: Conditionally Setting a Default Property](#example-conditionally-setting-a-default-property)
+   * [Type Constraint any](#type-constraint-any)
+   * [Non-type Constraint null](#non-type-constraint-null)
 
 <hr>
 
