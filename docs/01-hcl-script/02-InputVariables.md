@@ -10,9 +10,6 @@
 
 ## Table of Contents
 
-Table of Contents
-=================
-
 * [Input Variables](#input-variables)
    * [Introduction](#introduction)
    * [Variable Types](#variable-types)
