@@ -1,7 +1,5 @@
 # Data Types
 
-<!-- table -->
-
 | | |
 | --- | --- |
 | **Status** | Pending Approval |
@@ -10,10 +8,7 @@
 | **Last Updated** | 2023-03-21 |
 | **Created At** | 2023-03-21 |
 
-<!-- endtable -->
-
-Table of Contents
-=================
+## Table of Contents
 
 * [Data Types](#data-types)
    * [Non-structured data types](#non-structured-data-types)
