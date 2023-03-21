@@ -2,7 +2,7 @@
 
 | | |
 | --- | --- |
-| **Status** | Draft |
+| **Status** | Pending Approval |
 | **Author** | [Yi-Ting Li](yiting-tom.github.io) |
 | **Version** | 1.0.0 |
 | **Last Updated** | 2023-03-21 |
