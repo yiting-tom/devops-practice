@@ -1,7 +1,13 @@
 locals {
   services = [
-    "cloudbuild.googleapis.com",
+    "iap.googleapis.com",
   ]
+}
+
+provider "google" {
+  project     = var.project_id
+  region      = var.region
+  credentials = file(var.credentials)
 }
 
 resource "google_project" "project" {
@@ -28,3 +34,13 @@ resource "google_project_service" "service" {
 
 }
 
+resource "google_iap_brand" "brand" {
+  support_email     = var.support_email
+  project           = google_project.project.project_id
+  application_title = var.namespace
+}
+
+resource "google_iap_client" "client" {
+  display_name = var.namespace
+  brand        = google_iap_brand.brand.name
+}
