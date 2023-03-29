@@ -22,9 +22,8 @@ jobs:
       name: 'Authenticate to Google Cloud'
       uses: google-github-actions/auth@v1
       with:
-        service_account_key: ${{ secrets.GCP_SA_KEY }}
         project_id: ${{ env.PROJECT_ID }}
-        export_default_credentials: true
+        credentials: ${{ secrets.GCP_SA_CREDENTIALS }}
         
     # Configure Docker to use the glcoud CLI as a credential helper
     - run: |-
