@@ -1,7 +1,8 @@
 name: Build, Push, and Deploy to GCE
 
 on:
-  push:
+  - workflow_dispatch:
+  - push:
     branches: 
     - 'main'
     - 'releases/**'
