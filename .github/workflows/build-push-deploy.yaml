@@ -2,8 +2,7 @@ name: Build, Push, and Deploy to GCE
 
 on:
   push:
-    branches:
-    - main
+    branches: [ "main" ]
     # tags:
     # - 'v\d+\.\d+\.\d+'
 
