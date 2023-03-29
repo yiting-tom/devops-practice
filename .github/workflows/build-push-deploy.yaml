@@ -2,9 +2,10 @@ name: Build, Push, and Deploy to GCE
 
 on:
   push:
-    branches: [ "main" ]
-    # tags:
-    # - 'v\d+\.\d+\.\d+'
+    branches: 
+    - main
+    tags:
+    - 'v\d+\.\d+\.\d+'
 
 env:
   PROJECT_ID: devops-practice
@@ -15,13 +16,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # - name: Set ENV
-    #   run: |-
-    #     if [ ${GITHUB_REF##*/} = "main" ]; then
-    #       echo "::set-env name=ENV::staging"
-    #     else
-    #       echo "::set-env name=ENV::prod"
-    #     fi
+    - name: Set ENV
+      run: |-
+        if [ ${GITHUB_REF##*/} = "main" ]; then
+          echo "::set-env name=ENV::staging"
+        else
+          echo "::set-env name=ENV::prod"
+        fi
 
     - name: Checkout
       uses: actions/checkout@v3
