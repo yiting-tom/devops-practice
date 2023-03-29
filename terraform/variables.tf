@@ -1,25 +1,75 @@
-variable "project_id" {
-  description = "The project ID to deploy"
+#########################################################
+# Project variables
+#########################################################
+variable "namespace" {
   type        = string
+  description = "The namespace of the project"
+}
+
+variable "project_id" {
+  type        = string
+  description = "The project id"
+}
+
+variable "credentials_file" {
+  type        = string
+  description = "The path to the credentials file"
 }
 
 variable "region" {
-  description = "The region to deploy to"
+  type        = string
+  description = "The region of the project"
   default     = "asia-east1"
-  type        = string
 }
 
-variable "namespace" {
-  description = "The namespace to deploy to use for unique resource naming"
+variable "zone" {
   type        = string
+  description = "The zone of the project"
+  default     = "asia-east1-c"
 }
 
-variable "support_email" {
-  description = "The support email to use for IAP"
+
+#########################################################
+# GCE variables
+#########################################################
+variable "machine_type" {
   type        = string
+  description = "The machine type of the GCE instance"
+  default     = "f1-micro"
 }
 
-variable "credentials" {
-  description = "The credentials to use for GCP"
+
+#########################################################
+# MongoDB Atlas variables
+#########################################################
+variable "mongodbatlas_project_id" {
   type        = string
+  description = "The project id of the MongoDB Atlas"
+}
+
+variable "mongodbatlas_public_key" {
+  type        = string
+  description = "The public key of the MongoDB Atlas"
+}
+
+variable "mongodbatlas_private_key" {
+  type        = string
+  description = "The private key of the MongoDB Atlas"
+}
+
+variable "mongodbatlas_user_password" {
+  type        = string
+  description = "The password of the MongoDB Atlas"
+}
+
+#########################################################
+# Cloudflare variables
+#########################################################
+variable "cloudflare_api_token" {
+  type        = string
+  description = "The API token of the Cloudflare account"
+}
+variable "cloudflare_domain" {
+  type        = string
+  description = "The domain of the Cloudflare account"
 }
