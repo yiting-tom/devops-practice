@@ -43,30 +43,38 @@ create-tf-backend-bucket-iam-key:
 		terraform/terraform-sa-key.json \
 		--iam-account terraform-sa@$(PROJECT_ID).iam.gserviceaccount.com
 
+
+#####################################################################
+# Terraform commands.
+#####################################################################
+# Check if ENV is set.
 check-env:
 ifndef ENV
 	$(error Please set ENV=[staging|prod])
 endif
 
-tf-preinit:
-	cd terraform && \
-	export GOOGLE_APPLICATION_CREDENTIALS=terraform-sa-key.json && \
-	terraform init
-
-tf-create-workspace: check-env
-	cd terraform && \
-		terraform workspace new $(ENV)
-
-tf-init: check-env
-	cd terraform && \
-		terraform workspace select $(ENV) && \
-		terraform init
-
-# This cannot be indented or else make will include spaces in front of secret
+# Get a secret from Google Secret Manager.
 define get-secret
 $(shell gcloud secrets versions access latest --secret=$(1) --project=$(PROJECT_ID))
 endef
 
+# Initialize Terraform.
+tf-init: check-env
+	cd terraform && \
+		export GOOGLE_APPLICATION_CREDENTIALS=terraform-sa-key.json && \
+		terraform workspace select $(ENV) && \
+		terraform init
+
+# Create a new workspace.
+tf-create-workspace: check-env
+	cd terraform && \
+		terraform workspace new $(ENV)
+
+# Run Terraform commands.
+check-env:
+ifndef TF_CMD
+	$(error Please set TF_CMD=[plan|apply|destroy])
+endif
 TF_CMD?=plan
 tf-cmd: check-env
 	cd terraform && \
@@ -79,7 +87,15 @@ tf-cmd: check-env
 		-var="cloudflare_api_token=$(call get-secret,cloudflare_api_token)"
 
 
-SSH_STRING=devops-practice-vm-$(ENV)
+#####################################################################
+# GCE commands.
+#####################################################################
+SSH_STRING=devops-practice-vm-$(ENV)				# Name of the GCE instance.
+GITHUB_SHA?=latest									# Tag of the container image if running the GitHub Action use the commit SHA.
+LOCAL_TAG=$(NAMESPACE):$(GITHUB_SHA)				# Local tag of the container image.
+REMOTE_TAG=gcr.io/$(PROJECT_ID)/$(LOCAL_TAG)		# Remote tag of the container image.
+OAUTH_CLIENT_ID=342139977677-ml64tsiq924qlhjpep7rm2pamp8bv8f0.apps.googleusercontent.com # OAuth client ID.
+
 ssh:
 	gcloud compute ssh $(SSH_STRING) \
 		--project $(PROJECT_ID) \
@@ -91,16 +107,13 @@ ssh-cmd:
 		--zone $(ZONE) \
 		--command="${CMD}"
 
-GITHUB_SHA?=latest
-LOCAL_TAG=$(NAMESPACE):$(GITHUB_SHA)
-REMOTE_TAG=gcr.io/$(PROJECT_ID)/$(LOCAL_TAG)
 build:
 	docker build -t $(LOCAL_TAG) .
+
 push:
 	docker tag $(LOCAL_TAG) $(REMOTE_TAG)
 	docker push $(REMOTE_TAG)
 
-OAUTH_CLIENT_ID=342139977677-ml64tsiq924qlhjpep7rm2pamp8bv8f0.apps.googleusercontent.com
 deploy: check-env
 	$(MAKE) ssh-cmd CMD='docker-credential-gcr configure-docker'
 
