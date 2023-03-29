@@ -1,15 +1,9 @@
 name: Build, Push, and Deploy to GCE
 
 on:
-  - workflow_dispatch:
-  - push:
+  push:
     branches: 
     - 'main'
-    - 'releases/**'
-    tags:
-    - 'v\d+\.\d+\.\d+'
-
-    workflow_dispatch:
 
 env:
   PROJECT_ID: devops-practice
