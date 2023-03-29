@@ -1,15 +1,13 @@
-FROM node:14-slim
+FROM node:18-slim
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY ./package*.json ./
+COPY ./package*.json .
 
-RUN npm install
+RUN npm install --unsafe-perm --ignore-scripts
 
 COPY . .
 
-USER node
-
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

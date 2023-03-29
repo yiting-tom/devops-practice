@@ -7,25 +7,26 @@ services:
     ports:
       - '3000:3000'
     networks:
-      - storybooks-app
+      - devops-practice
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
     depends_on:
       - mongo
+
   mongo:
     image: mongo:3.6-xenial
     environment:
-      - MONGO_INITDB_DATABASE=storybooks
+      - MONGO_INITDB_DATABASE=devops-practice
     ports:
       - '27017:27017'
     networks:
-      - storybooks-app
+      - devops-practice
     volumes:
       - mongo-data:/data/db
 
 networks:
-  storybooks-app:
+  devops-practice:
     driver: bridge
 
 volumes:
