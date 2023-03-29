@@ -71,10 +71,6 @@ tf-create-workspace: check-env
 		terraform workspace new $(ENV)
 
 # Run Terraform commands.
-check-env:
-ifndef TF_CMD
-	$(error Please set TF_CMD=[plan|apply|destroy])
-endif
 TF_CMD?=plan
 tf-cmd: check-env
 	cd terraform && \
