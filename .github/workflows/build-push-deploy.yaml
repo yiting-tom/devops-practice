@@ -3,7 +3,7 @@ name: Build, Push, and Deploy to GCE
 on:
   push:
     branches: 
-    - 'main'
+    - main
 
 env:
   PROJECT_ID: devops-practice
@@ -12,7 +12,6 @@ jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
-
     steps:
     - name: Set ENV
       run: |-
