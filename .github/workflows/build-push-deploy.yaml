@@ -23,7 +23,7 @@ jobs:
       uses: google-github-actions/auth@v1
       with:
         project_id: ${{ env.PROJECT_ID }}
-        credentials: ${{ secrets.GCP_SA_CREDENTIALS }}
+        credentials_json: ${{ secrets.GCP_SA_CREDENTIALS }}
         
     # Configure Docker to use the glcoud CLI as a credential helper
     - run: |-
