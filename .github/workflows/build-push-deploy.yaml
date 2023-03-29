@@ -3,7 +3,8 @@ name: Build, Push, and Deploy to GCE
 on:
   push:
     branches: 
-    - main
+    - 'main'
+    - 'releases/**'
     tags:
     - 'v\d+\.\d+\.\d+'
 
