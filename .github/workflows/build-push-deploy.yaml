@@ -16,7 +16,6 @@ jobs:
     steps:
     - name: Set ENV
       run: |-
-      run: |-
         if [ ${GITHUB_REF##*/} = "main" ]; then
           echo "ENVIRONMENT=staging" >> $GITHUB_ENV
         else
