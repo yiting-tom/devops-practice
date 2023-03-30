@@ -4,6 +4,7 @@ on:
   push:
     branches: 
     - main
+    - release/v\d+\.\d+\.\d+ # release/v1.0.0
 
 env:
   PROJECT_ID: devops-practice
@@ -15,10 +16,11 @@ jobs:
     steps:
     - name: Set ENV
       run: |-
+      run: |-
         if [ ${GITHUB_REF##*/} = "main" ]; then
-          echo "::set-env name=ENV::staging"
+          echo "ENVIRONMENT=staging" >> $GITHUB_ENV
         else
-          echo "::set-env name=ENV::prod"
+          echo "ENVIRONMENT=prod" >> $GITHUB_ENV
         fi
 
     - name: Checkout
